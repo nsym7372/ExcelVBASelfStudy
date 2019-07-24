@@ -10,6 +10,9 @@ Attribute VB_Exposed = True
 Option Explicit
 
 Private Sub Workbook_AfterSave(ByVal Success As Boolean)
-    Shell ("..\csc vbac decombile")
+    Dim ws As Object
+    Set ws = New wshshell
+    
+    ws.Run ("cscript ..\vbac.wsf decombile")
 End Sub
 
