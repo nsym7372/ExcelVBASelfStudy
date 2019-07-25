@@ -107,40 +107,40 @@ Sub macro6()
     Dim user As Collection
     Set user = New Collection
     
-    user.Add "いちろう"
-    user.Add "じろう"
-    user.Add "さぶろう"
+    user.add "いちろう"
+    user.add "じろう"
+    user.add "さぶろう"
     
     Debug.Print user.Count
     Debug.Print user(1) 'インデックスは1から
     
-    user.Add "しろう", after:=1 '任意の位置に挿入
+    user.add "しろう", after:=1 '任意の位置に挿入
     Debug.Print user(2)
 End Sub
 
 Sub macro7()
-    Dim item As Collection
-    Set item = New Collection
+    Dim Item As Collection
+    Set Item = New Collection
     
     ' add( value, key )
-    item.Add 100, "いちろう"
-    item.Add 200, "じろう"
-    item.Add 300, "さぶろう"
+    Item.add 100, "いちろう"
+    Item.add 200, "じろう"
+    Item.add 300, "さぶろう"
     
-    Debug.Print item("いちろう")
+    Debug.Print Item("いちろう")
 '    item.Add 400, "いちろう"　キー重複はエラー
 End Sub
 
 Sub macro8()
-     Dim item As Variant
-     Set item = CreateObject("Scripting.Dictionary")
+     Dim Item As Variant
+     Set Item = CreateObject("Scripting.Dictionary")
      
-     item.Add "いちろう", 100
-     item.Add "じろう", 200
-     item.Add "さぶろう", 300
+     Item.add "いちろう", 100
+     Item.add "じろう", 200
+     Item.add "さぶろう", 300
      
-     Debug.Print Join(item.keys, ",")
-     Debug.Print Join(item.items, ",")
+     Debug.Print Join(Item.keys, ",")
+     Debug.Print Join(Item.items, ",")
      
      
 End Sub

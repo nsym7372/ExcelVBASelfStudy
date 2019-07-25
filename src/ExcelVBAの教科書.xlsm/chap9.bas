@@ -1,6 +1,12 @@
 Attribute VB_Name = "chap9"
 Option Explicit
 
+'macro10 モジュールの先頭に記載が必要
+Type Item
+    Name As String
+    Price As Currency
+End Type
+
 Sub macro1()
     Call macro2
     macro2  'call無しでも呼べる
@@ -71,3 +77,23 @@ Sub macro8()
     
     MyGoods.ShowInfo
 End Sub
+
+Sub macro9()
+    Dim p As IPerson
+    Set p = New Person
+    
+    p.Name = "はまちや"
+    p.Say
+
+End Sub
+
+' 構造体の定義はモジュールの先頭
+Sub macro10()
+    'オブジェクトの定義
+    Dim i As Item
+    i.Name = "トラックボール"
+    i.Price = "5000"
+    
+    Debug.Print i.Name & ":" & i.Price
+End Sub
+

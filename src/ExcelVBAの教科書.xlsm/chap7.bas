@@ -48,7 +48,7 @@ Sub macro7()
     
 ErrorHandler:
 
-    Worksheets.Add.Name = "集計2"
+    Worksheets.add.Name = "集計2"
     Resume Next
     
 End Sub
