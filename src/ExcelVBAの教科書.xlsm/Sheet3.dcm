@@ -1,0 +1,141 @@
+VERSION 1.0 CLASS
+BEGIN
+  MultiUse = -1  'True
+END
+Attribute VB_Name = "Sheet3"
+Attribute VB_GlobalNameSpace = False
+Attribute VB_Creatable = False
+Attribute VB_PredeclaredId = True
+Attribute VB_Exposed = True
+Option Explicit
+
+Sub macro1()
+    Range("A1").Value = "VBA"
+    Cells(2, 1).Value = "VBA-2"
+    
+    Range(Range("A3"), Range("B4")).Value = "VBA-3"
+    Range(Range("A4"), Range("A4").End(xlToRight)).Value = "VBA-4"
+End Sub
+
+
+Sub macro2()
+    Selection.Value = "Excel"
+    ActiveCell.Value = "xlsx"
+End Sub
+
+Sub macro3()
+    Rows(5) = "Hello"
+    Columns(5) = "World"
+    Columns("F").Value = "!!"
+    
+    Rows("7:8").Value = "こんにちは"
+    'Columns("7:8").Value = "せかい" ' 列番号はNG
+    Columns("G:H").Value = "せかい"
+    
+End Sub
+
+Sub macro4()
+    Range("B5").EntireRow.Value = "行"
+    Range("C6").EntireColumn.Value = "列"
+End Sub
+
+Sub macro5()
+    Range("B3:E5").Interior.Color = RGB(128, 128, 128)
+    Range("B3").Cells(2, 3).Interior.ColorIndex = 3
+End Sub
+
+Sub macro6()
+    Range("G2:J7").Interior.Color = RGB(128, 128, 128)
+    Range("G2:J7").Rows(2).Value = Array("hello", "World", "!!")
+    Range("G2:J7").Columns(2).Interior.ColorIndex = 3
+End Sub
+
+Sub macro7()
+    MsgBox _
+        Range("G2:J7").Rows.Count & vbCrLf & _
+        Range("G2:J7").Columns.Count & vbCrLf & _
+        Range("G2:J7").Cells.Count
+End Sub
+
+Sub macro8()
+    Range("G2:J7").Cells(3).Interior.ColorIndex = 28
+    Range("G2:J7").Cells(6).Interior.ColorIndex = 28
+    Range("G2:J7").Cells(9).Interior.ColorIndex = 28
+    Range("G2:J7").Cells(Range("G2:J7").Cells.Count).Interior.ColorIndex = 28
+End Sub
+
+'macro8と同義
+Sub macro8_extra()
+    With Range("G2:J7")
+        .Cells(3).Interior.ColorIndex = 28
+        .Cells(6).Interior.ColorIndex = 28
+        .Cells(9).Interior.ColorIndex = 28
+        .Cells(.Cells.Count).Interior.ColorIndex = 28
+    End With
+End Sub
+
+Sub macro9()
+    With Range("B10:C12, F10:H13")
+        .Interior.Color = RGB(128, 128, 128)
+        .Areas(1).Cells(3).Interior.ColorIndex = 28
+        .Areas(2).Cells(3).Interior.ColorIndex = 3
+        MsgBox "エリア数：" & .Areas.Count
+    End With
+End Sub
+
+Sub macro10()
+    Range("C15").Resize(2, 2).Interior.ColorIndex = 15
+End Sub
+
+Sub macro11()
+    With Range("B18")
+        .Interior.ColorIndex = 15
+        .Offset(1, 1).Interior.ColorIndex = 3
+    End With
+End Sub
+
+Sub macro12()
+    With Range("L13")
+        MsgBox .CurrentRegion.Address
+        .CurrentRegion.Rows(1).Interior.ColorIndex = 15
+        .CurrentRegion.Rows(.CurrentRegion.Rows.Count).Interior.ColorIndex = 28
+    End With
+End Sub
+
+Sub macro13()
+    With Range("L13").CurrentRegion
+        .Rows(.Rows.Count).Interior.ColorIndex = 28
+        .Columns(2).Interior.ColorIndex = 3
+    End With
+End Sub
+
+Sub macro14()
+    With Range("L13").CurrentRegion.Columns(2)
+        .Rows("2:" & .Rows.Count).Interior.ColorIndex = 40
+    End With
+End Sub
+
+Sub macro15()
+'    Columns("B").Cells(Rows.Count) B列の一番下のセル
+    Columns("B").Cells(Rows.Count).End(xlUp).Offset(1).Select
+    
+End Sub
+
+Sub macro16()
+
+    Dim mytable As ListObject
+    Set mytable = ActiveSheet.ListObjects.add(xlSrcRange, Range("F20:K27"), XlListObjectHasHeaders:=xlYes)
+    
+    mytable.Name = "売上テーブル2"
+    mytable.TableStyle = ""
+    mytable.ShowAutoFilter = False
+    
+End Sub
+
+Sub macro17()
+    Dim tmprow As ListRow
+    Set tmprow = ActiveSheet.ListObjects("売上テーブル2").ListRows.add '挿入場所の下に値があるなど、影響を及ぼす場合はエラーになる様子
+    
+    tmprow.Range.Value = Array(6, "パイナップル", 1200, 2, "=R[0]C[-2]*R[0]C[-1]")
+    
+End Sub
