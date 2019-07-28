@@ -1,5 +1,12 @@
 Attribute VB_Name = "ブックとシート"
 Option Explicit
+' ワークブック、ワークシートの明示
+Sub ExplicitObject()
+    Debug.Print Worksheets(1).Name ' アクティブなブックにより、対象が変化
+    Debug.Print ThisWorkbook.Worksheets(1).Name ' マクロが存在する、このブックを明示
+    Debug.Print ThisWorkbook.Worksheets(Sheet1.Name).Name   'シート名をオブジェクト名で指定
+    Debug.Print Sheet1.Name ' ActiveBookには影響されない模様（上記と同義）
+End Sub
 
 ' ワークシートをオブジェクト名で指定
 Sub SelectSheet()
