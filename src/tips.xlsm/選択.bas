@@ -26,3 +26,9 @@ Sub MergedCellDetail()
     End With
     
 End Sub
+
+' 範囲内の数式が入ったセルを選択
+Sub SpecalizedCell()
+    '　「条件を指定してジャンプ」で選択できるものに相当
+     Range("B5:F10").SpecialCells(xlCellTypeFormulas).Select
+End Sub
