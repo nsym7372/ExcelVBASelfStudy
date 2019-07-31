@@ -119,18 +119,44 @@ Sub BulkSet()
     Range("C7:E7").Value = Array(1, 2, 3)
 End Sub
 
-' セル結合とClear
-Sub MergeAndClear()
-    ' 以下二つは同じ結果
-    Range("A1").Value = "Hello world"
-    Range("A1:B2").Merge
-    
-    Range("C1").Value = "Hello world"
-    Range("C1:D2").Merge
+' Regex
+Sub RegularExpression()
 
-'    Range("A1").ClearContents  結合範囲を全て選択しないとエラー
-    Range("A1").MergeArea.ClearContents 'OK
-    Range("C1").Value = ""  '見かけ上は同じだが、値は存在する
+    Dim regex As Object
+    Dim matches As Object
+    Set regex = CreateObject("VBScript.RegExp")
+
+    With regex
+        .Global = True
+        .Pattern = "(\w+)@\w+"
+    
+        Set matches = .Execute("sample_test@contoso.com")
+        If matches.Count Then ' success判定
+            Debug.Print matches(0) ' 全体
+            Debug.Print matches(0).SubMatches(0) ' キャプチャしたものを取得
+        End If
+    End With
 End Sub
 
+' 値のコピー
+Sub CopyData()
+     
+    With ThisWorkbook.Worksheets("Sheet1")
+        .Range("A1:A10").Copy (.Range("C3"))
+    End With
+    
+End Sub
+
+' シート作って、作ったシートに値をコピー
+Sub CreateBookAndAddSheet()
+    Dim ws As Worksheet
+    Set ws = ThisWorkbook.Worksheets("Sheet1")
+
+'   新しいブックにシートを追加して、値をコピー
+    With Workbooks.Add
+        ws.Range("A1:A10").Copy .Worksheets(1).Range("A1")
+        .SaveAs (ThisWorkbook.Path & "\book1.xlsx")
+    End With
+        
+End Sub
 
