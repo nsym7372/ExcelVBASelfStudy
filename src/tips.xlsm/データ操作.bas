@@ -35,6 +35,39 @@ Sub DeclareCollection()
     Next
 End Sub
 
+' Collectionを連想配列として利用
+Sub Hashtable()
+    Dim prices As Collection
+    Set prices = New Collection
+    
+    ' 第二引数がキー
+    With prices
+        .Add 200, "りんご"
+        .Add 150, "みかん"
+        .Add 500, "ぶどう"
+    End With
+    
+    Debug.Print "りんごの価格：" & prices("りんご")
+    
+End Sub
+
+' Dictionary
+Sub Dictionary()
+    Dim prices As Object
+    Set prices = CreateObject("Scripting.Dictionary")
+    
+    With prices
+        .Add "りんご", 200
+        .Add "みかん", 150
+        .Add "ぶどう", 500
+    End With
+    
+    Debug.Print Join(prices.items)
+    Debug.Print Join(prices.keys)
+    Debug.Print prices.exists("りんご")
+
+End Sub
+
 ' For Each
 Sub ForEach()
     Dim ary(2) As String
@@ -100,5 +133,4 @@ Sub MergeAndClear()
     Range("C1").Value = ""  '見かけ上は同じだが、値は存在する
 End Sub
 
-' セル幅
 
