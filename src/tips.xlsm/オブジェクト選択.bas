@@ -27,7 +27,6 @@ Sub Selection()
 
 End Sub
 
-
 ' ÅIs‚ğ‘I‘ğ
 Sub SelectLastRow()
     Worksheets(1).Cells(Rows.Count, Range("A1").Columns.Count).End(xlUp).Select
